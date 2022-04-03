@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>FitApp</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="manifest"
+      href="./manifest.webmanifest"
+      crossorigin="use-credentials"
+    />
+    <link rel="icon" type="image/png" href="./assets/appicons/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Tô Ferrado" />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="./assets/appicons/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="./assets/appicons/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="./assets/appicons/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="./assets/appicons/apple-icon-152x152.png"
+    />
+    <links
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/appicons/apple-icon-180x180.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="./tesi.js"></script>
+    <script src="./main.js"></script>
+  </head>
+  
+  <body>
+    <header class="headerBar purple">
+      <div class="appName">FitApp</div>
+      <div style="margin-right: 15px ;">
+          <a style="cursor: pointer ;" onclick="ativa('tela1')">Refeições</a>
+          <a style="cursor: pointer ;" onclick="ativa('tela2')">Comidas</a>
+      </div>
+    </header>
+
+    <div id="tela1" class="component">
+      <div class="componentHeader">
+        <h1 class="componentTitle">
+          Refeições
+        </h1>
+
+        <button onclick="ativa('tela5')" class="button primary">
+          <img src="./assets/plus1.png" />
+        </button>
+      </div>
+
+      <div class="componentContent">
+        <ul id="listaRefeicoes" class="list hidden"></ul>
+      </div>
+    </div>
+
+    <div id="tela2" class="component hidden">
+      <div class="componentHeader">
+        <h1 class="componentTitle">
+          Comidas
+        </h1>
+        
+        <button onclick="ativa('tela3')" class="button purple">
+          <img src="./assets/plus1.png" />
+        </button>
+      </div>
+
+      <div class="componentContent">
+        <ul id="listaComidas" class="list hidden"></ul>
+      </div>
+    </div>
+
+    <div id="tela3" class="component hidden">
+      <div class="componentHeader">
+        <h1 class="componentTitle">Nova Comida</h1>
+      </div>
+      <div class="componentContent">
+        <div class="field">
+          <label >Comida:</label>
+          <input id="comida" type="text" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label >Qtd:</label>
+          <input id="qtd" type="number" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label >Carboidrato:</label>
+          <input id="carboidrato" type="number" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label >Proteina:</label>
+          <input id="proteina" type="number" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label >Gordura:</label>
+          <input id="gordura" type="number" autocomplete="off" />
+        </div>
+
+        <div class="buttonGroup mt1 end">
+          <button onclick="ativa('tela2')" class="button quarter light">Cancelar</button>
+          <button onclick="adicionaComida()" class="button quarter purple">
+            Adicionar Comida
+          </button>
+        </div>
+      </div> 
+    </div>
+
+    <div id="tela4" class="component hidden">
+      <div class="componentHeader">
+        <h1 class="componentTitle">Editar comida</h1>
+      </div>
+      <div class="componentContent">
+        <input id="id_comida" hidden/>
+
+        <div class="field">
+          <label >Comida:</label>
+          <input id="edit_comida" type="text" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label >Qtd:</label>
+          <input id="edit_qtd" type="number" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label >Carboidrato:</label>
+          <input id="edit_carboidrato" type="number" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label >Proteina:</label>
+          <input id="edit_proteina" type="number" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label >Gordura:</label>
+          <input id="edit_gordura" type="number" autocomplete="off" />
+        </div>
+
+        <div class="buttonGroup end mt1">
+          <button onclick="ativa('tela2')" class="button quarter light">Cancelar</button>
+          <button onclick="apagarComida()" class="button quarter danger">
+            Excluir Comida
+          </button>
+          <button onclick="editarComida()" class="button quarter purple">Editar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="tela5" class="component hidden">
+      <div class="componentHeader">
+        <h1 class="componentTitle">Nova Refeição</h1>
+      </div>
+      <div class="componentContent">
+        <div class="field">
+          <label >Horario:</label>
+          <input id="horario" type="datetime-local" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label> Comida:</label>
+          <input id="comida_refeicao" type="text" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label >Qtd:</label>
+          <input id="qtd_refeicao" type="number" autocomplete="off" />
+        </div>
+
+        <div class="buttonGroup mt1 end">
+          <button onclick="ativa('tela1')" class="button quarter light">Cancelar</button>
+          <button onclick="adicionarRefeicao()" class="button quarter primary">
+            Adicionar Refeição
+          </button>
+        </div>
+      </div>      
+
+    </div>
+
+    <div id="tela6" class="component hidden">
+      <div class="componentHeader">
+        <h1 class="componentTitle">Editar Refeição</h1>
+      </div>
+      <div class="componentContent">
+        <input id="id_refeicao" hidden/>
+
+        <div class="field">
+          <label >Horario:</label>
+          <input id="horario_edit_refeicao" type="datetime-local" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label >Comida:</label>
+          <input id="comida_edit_refeicao" type="text" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label >Qtd:</label>
+          <input id="qtd_edit_refeicao" type="number" autocomplete="off" />
+        </div>
+
+        <div class="buttonGroup end mt1">
+          <button onclick="ativa('tela1')" class="button quarter light">Cancelar</button>
+          <button onclick="apagarRefeicao()" class="button quarter danger">
+            Excluir Comida
+          </button>
+          <button onclick="editarRefeicao()" class="button quarter primary">Editar</button>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
